@@ -3,6 +3,7 @@ import { bodoni } from "@/lib/fonts";
 import { Button } from "@/components/ui/button"
 
 export default function Home() {
+  // desde aca
   return (
     <div className="mt-20 py-3 min-h-screen">
       <section className="mt-16 min-h-screen">
