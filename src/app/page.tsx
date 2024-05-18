@@ -38,7 +38,7 @@ export default function Home() {
         <Image className="animate-fade-in animate-delay-900" src="/divisor.png" alt="division de secciones" width={1980} height={38} />
       </section>
 
-      <section className="container relative grid grid-cols-2 py-60">
+      <section className="container relative grid grid-cols-2 py-28">
         <img src="/ilustracion-hojas.webp" alt="hojas de fondo" className="absolute top-10 left-32 -z-10 ilustracion" />
         <article className="flex flex-col items-center justify-center text-center col-span-1 p-4 max-w-[520px] gap-9">
           <h2 className={`animate-fade-in-up text-[42px] md:text-[56px] text-primary ${bodoni.className}`}>¿ Porque TeaChill ?</h2>
@@ -122,7 +122,7 @@ interface DayButtonProps {
 export function DayButton({ right, title, day, discount, children, href }: DayButtonProps) {
   return (
     <div className={`w-full flex ${right ? 'justify-end' : 'justify-start'}`}>
-      <Link href={href} className="day-link flex justify-between bg-white w-[70%] rounded-md overflow-hidden hover:bg-secondary">
+      <Link href={href} className="day-link flex justify-between bg-white w-[70%] rounded-md overflow-hidden hover:bg-secondary animate-fade-in-up duration-600">
         <div className="px-3 py-6">
           <h3 className="transition-all duration-300 text-primary font-semibold text-2xl">{title}</h3>
           <strong className="transition-all duration-300 text-lg text-accent font-semibold">{day} <span>{discount}</span></strong>
