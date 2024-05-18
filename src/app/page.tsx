@@ -1,6 +1,7 @@
 import { bodoni } from "@/lib/fonts";
 
 import { Button } from "@/components/ui/button"
+import Image from "next/image";
 
 export default function Home() {
   // desde aca
@@ -21,6 +22,7 @@ export default function Home() {
             <div className="shadow-lg shadow-primary bg-[url('/te-home-4.webp')] bg-center bg-cover w-[600px] h-[160px] rounded-md"></div>
           </div>
         </div>
+        <Image src="/divisor.png" alt="division de secciones" width={1980} height={38} />
       </section>
     </div>
   );
