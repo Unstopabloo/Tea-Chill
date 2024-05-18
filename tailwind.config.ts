@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss"
+// @ts-ignore
+import animations from '@midudev/tailwind-animations'
 
 const config = {
   darkMode: ["class"],
@@ -7,9 +9,16 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
+    backgroundSize: {
+      'auto': 'auto',
+      'cover': 'cover',
+      'contain': 'contain',
+      'zoom': '120%',
+      '2zoom': '150%'
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -74,7 +83,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), animations],
 } satisfies Config
 
 export default config

@@ -42,7 +42,7 @@ export default function RootLayout({
 
   return (
     <html lang="es">
-      <body className={`relative mx-auto ${inter.className}`}>
+      <body className={`relative mx-auto overflow-x-hidden ${inter.className}`}>
         <header className="z-50 bg-background py-8 fixed top-0 left-0 w-full max-h-[122px]">
           <nav className="flex justify-between container">
             <ul className="flex gap-4">
