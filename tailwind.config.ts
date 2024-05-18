@@ -12,6 +12,13 @@ const config = {
   ],
   prefix: "",
   theme: {
+    backgroundSize: {
+      'auto': 'auto',
+      'cover': 'cover',
+      'contain': 'contain',
+      'zoom': '120%',
+      '2zoom': '150%'
+    },
     container: {
       center: true,
       padding: "2rem",
