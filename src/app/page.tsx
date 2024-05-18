@@ -47,7 +47,7 @@ export default function Home() {
           <Button className="animate-fade-in-up animate-delay-300 flex items-center gap-2" variant="default" size="principal">Descuento por día <ArrowRight size={20} /></Button>
         </article>
 
-        <article className="flex flex-col col-span-1 p-4 gap-6">
+        <article className="flex flex-col col-span-1 p-4 gap-6 animate-fade-in-up animate-delay-900 duration-600">
           <DayButton
             title="Té Negro"
             day="Lunes"
