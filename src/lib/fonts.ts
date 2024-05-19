@@ -1,4 +1,4 @@
-import { Inter, Rosarivo, Bodoni_Moda } from 'next/font/google'
+import { Inter, Bodoni_Moda } from 'next/font/google'
 
 export const inter = Inter({
   subsets: ['latin'],
@@ -10,4 +10,10 @@ export const bodoni = Bodoni_Moda({
   display: 'swap',
   weight: '500',
   style: 'italic'
+})
+export const bodoniNormal = Bodoni_Moda({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '500',
+  style: 'normal'
 })
