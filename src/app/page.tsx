@@ -24,8 +24,6 @@ export default async function Home() {
   const matchaRegularPrice = matcha?.priceRange.minVariantPrice.amount || destacados[5].priceRange.minVariantPrice.amount
   const matchaDiscountPrice = (parseInt(matchaRegularPrice) * 0.88).toString()
 
-  console.log("Menos Matcha: ", destacados)
-
   return (
     <div className="mt-20 py-3 min-h-screen">
       <section className="mt-16">
@@ -148,7 +146,7 @@ export default async function Home() {
         <Image className="animate-fade-in animate-delay-900 rotate-180" src="/divisor.png" alt="division de secciones" width={1980} height={38} />
       </section>
 
-      <Image className="mb-44" src="/banner-despacho-2.webp" alt="Imagen informativa de despacho" width={1880} height={200} />
+      <Image className="mb-44" src="/banner-despacho.webp" alt="Imagen informativa de despacho" width={1880} height={200} />
 
       <section className="container flex flex-col gap-28 pb-16">
 
