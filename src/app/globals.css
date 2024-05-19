@@ -7,7 +7,7 @@
     --background: 53, 100%, 98%, 1;
     --foreground: 224 71.4% 4.1%;
 
-    --card: 0 0% 100%;
+    --card: 344 67% 83%;
     --card-foreground: 224 71.4% 4.1%;
 
     --popover: 0 0% 100%;
@@ -27,8 +27,6 @@
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 20% 98%;
-
-    --footer-link: 0, 0%, 51%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
