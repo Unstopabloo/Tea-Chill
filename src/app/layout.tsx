@@ -13,7 +13,7 @@ import {
 import {
   ChevronDown, Clock,
   Heart, Mailbox,
-  Search, ShoppingBag,
+  Search, ShoppingBasket,
   User, Instagram
 } from "lucide-react";
 import {
@@ -140,7 +140,7 @@ export default function RootLayout({
               </li>
               <li>
                 <Button variant="link" size="icon">
-                  <ShoppingBag size={18} />
+                  <ShoppingBasket size={18} />
                 </Button>
               </li>
               <li>
@@ -159,7 +159,7 @@ export default function RootLayout({
         <main>
           {children}
         </main>
-        <footer className="flex items-start justify-between gap-10 px-2 py-5 container">
+        <footer className="flex items-start justify-between gap-10 px-2 py-10 container">
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-semibold">Atención a cliente</h2>
             <ul className="flex flex-col gap-3 max-w-96">

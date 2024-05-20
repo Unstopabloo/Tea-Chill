@@ -1,23 +1,35 @@
-import { bodoni, bodoniNormal } from "@/lib/fonts";
+import { bodoni } from "@/lib/fonts";
 
 import { Button } from "@/components/ui/button"
 import Image from "next/image";
 import { ArrowRight } from "lucide-react"
 import { DayButton } from "./_root_components/DayButton";
-import { ShoppingBag } from "lucide-react"
+import { ShoppingBasket } from "lucide-react"
+import { Price } from "@/components/Price";
 
-import { getProducts } from "@/lib/shopify";
+import { ManchaHoja, ManchaEnvio, ManchaTarjeta } from "@/lib/icons";
+
+import { getCollectionProducts } from "@/lib/shopify";
 
 export default async function Home() {
-  const products = await getProducts({});
-  console.log(products);
+  const accesorios = await getCollectionProducts({ collection: 'Accesorios' })
+  const destacadosList = await getCollectionProducts({ collection: 'Destacado' })
+  const matchaProduct = await getCollectionProducts({ collection: 'Destacado' })
+
+  const matcha = matchaProduct.find(item => item.title === 'Matcha')
+  const destacados = destacadosList.filter(item => item.title !== 'Matcha')
+
+  const matchaIMG = matcha?.featuredImage.url || destacados[5].featuredImage.url
+  const matchaAlt = matcha?.featuredImage.altText || destacados[5].featuredImage.altText
+  const matchaRegularPrice = matcha?.priceRange.minVariantPrice.amount || destacados[5].priceRange.minVariantPrice.amount
+  const matchaDiscountPrice = (parseInt(matchaRegularPrice) * 0.88).toString()
 
   return (
     <div className="mt-20 py-3 min-h-screen">
       <section className="mt-16">
         <div className="container flex flex-col items-center gap-12">
           <h1 className={`animate-fade-in-up text-[42px] md:text-[56px] w-full text-center text-primary ${bodoni.className} leading-snug`}>Crea una pasión <br /> por el té</h1>
-          <Button className="animate-fade-in-up animate-delay-300" variant="default" size="principal">Ver tipos de té</Button>
+          <Button className="animate-fade-in-up animate-delay-300" variant="default" size="principal">Todos los productos</Button>
         </div>
         <div className="w-screen flex justify-between mt-8 md:mt-2">
           <div className="flex flex-col items-start">
@@ -116,23 +128,17 @@ export default async function Home() {
       <section className="pt-16">
         <div className="container flex flex-wrap items-center justify-center pb-16">
           <div className="animate-fade-in-right animate-delay-700 flex flex-col w-1/2 md:w-auto items-center text-center gap-3 p-4 md:p-10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="88" height="83" viewBox="0 0 88 83" fill="none">
-              <path d="M46.643 82.2986C55.5343 82.6666 65.0525 82.7244 72.3896 77.6888C79.6576 72.7006 83.2131 63.9244 85.7261 55.475C88.0061 47.8093 87.6439 39.7938 85.9877 31.9695C84.415 24.5398 82.8932 15.837 76.4758 11.7761C70.074 7.72511 61.5676 13.6603 54.2087 11.86C47.397 10.1935 43.0977 2.90961 36.1564 1.91218C27.0985 0.61061 16.5456 -0.39456 9.49136 5.43431C2.40508 11.2896 1.04323 21.8575 0.894391 31.0487C0.755851 39.6039 4.99447 47.2419 8.68937 54.9592C12.3178 62.5379 15.4128 70.7017 22.2306 75.6128C29.2181 80.6461 38.0388 81.9425 46.643 82.2986Z" fill="#81A388" />
-            </svg>
+            <ManchaHoja />
             <h3 className="text-primary font-semibold text-xl">Despacho en todo Chile</h3>
             <span className="text-[#828282] font-light max-w-[250px]">Recibe tus pedidos en tu hogar, en todo el país.</span>
           </div>
           <div className="animate-fade-in-up flex flex-col items-center text-center w-1/2 md:w-auto gap-3 p-4 md:p-10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="88" height="83" viewBox="0 0 88 83" fill="none">
-              <path d="M46.643 82.2986C55.5343 82.6666 65.0525 82.7244 72.3896 77.6888C79.6576 72.7006 83.2131 63.9244 85.7261 55.475C88.0061 47.8093 87.6439 39.7938 85.9877 31.9695C84.415 24.5398 82.8932 15.837 76.4758 11.7761C70.074 7.72511 61.5676 13.6603 54.2087 11.86C47.397 10.1935 43.0977 2.90961 36.1564 1.91218C27.0985 0.61061 16.5456 -0.39456 9.49136 5.43431C2.40508 11.2896 1.04323 21.8575 0.894391 31.0487C0.755851 39.6039 4.99447 47.2419 8.68937 54.9592C12.3178 62.5379 15.4128 70.7017 22.2306 75.6128C29.2181 80.6461 38.0388 81.9425 46.643 82.2986Z" fill="#81A388" />
-            </svg>
+            <ManchaEnvio />
             <h3 className="text-primary font-semibold text-xl">Muestras gratis en cada pedido</h3>
             <span className="text-[#828282] font-light max-w-[250px]">Recibe 3 muestras gratis por parte de TeaChill. ¡Disfrutalos!</span>
           </div>
           <div className="animate-fade-in-left animate-delay-700 flex flex-col items-center text-center gap-3 p-4 md:p-10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="88" height="83" viewBox="0 0 88 83" fill="none">
-              <path d="M46.643 82.2986C55.5343 82.6666 65.0525 82.7244 72.3896 77.6888C79.6576 72.7006 83.2131 63.9244 85.7261 55.475C88.0061 47.8093 87.6439 39.7938 85.9877 31.9695C84.415 24.5398 82.8932 15.837 76.4758 11.7761C70.074 7.72511 61.5676 13.6603 54.2087 11.86C47.397 10.1935 43.0977 2.90961 36.1564 1.91218C27.0985 0.61061 16.5456 -0.39456 9.49136 5.43431C2.40508 11.2896 1.04323 21.8575 0.894391 31.0487C0.755851 39.6039 4.99447 47.2419 8.68937 54.9592C12.3178 62.5379 15.4128 70.7017 22.2306 75.6128C29.2181 80.6461 38.0388 81.9425 46.643 82.2986Z" fill="#81A388" />
-            </svg>
+            <ManchaTarjeta />
             <h3 className="text-primary font-semibold text-xl">Diferentes formas de pago</h3>
             <span className="text-[#828282] font-light max-w-[250px]">Opta por tu mejor forma de pago con debito y/o crédito.</span>
           </div>
@@ -140,8 +146,9 @@ export default async function Home() {
         <Image className="animate-fade-in animate-delay-900 rotate-180" src="/divisor.png" alt="division de secciones" width={1980} height={38} />
       </section>
 
+      <Image className="mb-44" src="/banner-despacho.webp" alt="Imagen informativa de despacho" width={1880} height={200} />
+
       <section className="container flex flex-col gap-28 pb-16">
-        <div className="bg-secondary rounded-md w-full h-48"></div>
 
         <header className="flex justify-between items-center text-center gap-10">
           <Image className="hidden md:block" src="/hoja-destacados.webp" alt="Imagen decorativa de hojas de té" width={76} height={82} />
@@ -153,14 +160,17 @@ export default async function Home() {
 
         <div className="flex flex-col md:grid md:grid-cols-3 md:grid-rows-6 gap-8">
           <div role="card" className="flex flex-col items-start rounded-md col-span-1 row-span-6">
-            <figure className="bg-card rounded-md w-full aspect-[10/11] flex items-center justify-center">
-              <Image src="/te-negro-arandano.webp" alt="Imagen de té destacado" width={300} height={300} />
+            <figure className="relative bg-card rounded-md w-full aspect-[10/11] flex items-center justify-center">
+              <div className="absolute top-3 right-3 size-10 flex items-center justify-center font-semibold text-sm rounded-full p-3 bg-warning text-warning-foreground">-12%</div>
+              <Image src={destacados[0].featuredImage.url} alt={destacados[0].featuredImage.altText} width={300} height={300} />
             </figure>
-            <figcaption className="flex flex-col gap-2 md:gap-0 items-start md:flex-row justify-between py-4">
-              <h3 className={`${bodoni.className} text-primary text-4xl`}>Té negro Arandano</h3>
+            <figcaption className="flex flex-col gap-2 md:gap-0 items-start md:flex-row justify-between py-4 w-full">
+              <h3 className={`${bodoni.className} text-primary text-4xl`}>{destacados[0].title}</h3>
               <div className="flex items-start flex-col md:items-end justify-between gap-4 min-w-52">
-                <span className="text-[#828282] font-light">$6.990 - <strong className="font-semibold text-accent">$4.990</strong></span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBag size={16} /></Button>
+                <span className="text-[#828282] font-light">
+                  <Price price={destacados[0].priceRange.minVariantPrice.amount} /> - <strong className="font-semibold text-accent"><Price price={(parseInt(destacados[0].priceRange.minVariantPrice.amount) * 0.88).toString()} /></strong>
+                </span>
+                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
               </div>
             </figcaption>
           </div>
@@ -173,8 +183,15 @@ export default async function Home() {
               width={495}
               height={200}
             />
-            <figure className="bg-card rounded-md h-full aspect-square flex items-center justify-center">
-              <Image className="rounded-md h-full aspect-video object-cover" src="/matcha-bg-destacado.webp" alt="Imagen de Matcha destacado" width={200} height={200} />
+            <figure className="relative bg-card rounded-md h-full aspect-square flex items-center justify-center">
+              <div className="absolute top-3 right-3 size-10 flex items-center justify-center font-semibold text-sm rounded-full p-3 bg-warning text-warning-foreground">-12%</div>
+              <Image
+                className="rounded-md h-full aspect-video object-cover"
+                src={matchaIMG}
+                alt={matchaAlt}
+                width={200}
+                height={200}
+              />
             </figure>
             <figcaption className="flex flex-col items-start justify-between py-2 md:py-0 h-full md:ps-4">
               <h3 className={`${bodoni.className} text-primary text-3xl font-semibold flex flex-col`}>
@@ -183,40 +200,122 @@ export default async function Home() {
                 <span className="hidden md:block text-primary/30">TE MATCHA</span>
               </h3>
               <div className="flex flex-col items-start justify-between gap-3 min-w-52">
-                <span className="text-[#828282] font-light">$6.990 - <strong className="font-semibold text-accent">$4.990</strong></span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBag size={16} /></Button>
+                <span className="text-[#828282] font-light">
+                  <Price price={matchaRegularPrice} /> - <strong className="font-semibold text-accent"><Price price={matchaDiscountPrice} /></strong>
+                </span>
+                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
               </div>
             </figcaption>
           </div>
 
           <div role="card" className="flex flex-col items-start rounded-md col-span-1 row-span-4">
-            <figure className="bg-card rounded-md w-full aspect-square md:aspect-video flex items-center justify-center">
-              <Image src="/te-negro-arandano.webp" alt="Imagen de té destacado" width={150} height={150} />
+            <figure className="relative bg-card rounded-md w-full aspect-square md:aspect-video flex items-center justify-center">
+              <div className="absolute top-3 right-3 size-10 flex items-center justify-center font-semibold text-sm rounded-full p-3 bg-warning text-warning-foreground">-12%</div>
+              <Image src={destacados[1].featuredImage.url} alt={destacados[1].featuredImage.altText} width={150} height={150} />
             </figure>
-            <figcaption className="flex flex-col md:flex-row justify-between py-4">
-              <h3 className={`${bodoni.className} text-primary text-4xl`}>Te Blanco con berrys</h3>
+            <figcaption className="flex flex-col md:flex-row justify-between w-full py-4">
+              <h3 className={`${bodoni.className} text-primary text-4xl`}>{destacados[1].title}</h3>
               <div className="flex flex-col items-start md:items-end justify-between gap-3 md:gap-1 min-w-52">
-                <span className="text-[#828282] font-light">$6.990 - <strong className="font-semibold text-accent">$4.990</strong></span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBag size={16} /></Button>
+                <span className="text-[#828282] font-light">
+                  <Price price={destacados[1].priceRange.minVariantPrice.amount} /> - <strong className="font-semibold text-accent"><Price price={(parseInt(destacados[1].priceRange.minVariantPrice.amount) * 0.88).toString()} /></strong>
+                </span>
+                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
               </div>
             </figcaption>
           </div>
 
           <div role="card" className="flex flex-col items-start rounded-md col-span-1 row-span-4">
-            <figure className="bg-card rounded-md w-full aspect-square md:aspect-video flex items-center justify-center">
-              <Image src="/te-negro-arandano.webp" alt="Imagen de té destacado" width={150} height={150} />
+            <figure className="relative bg-card rounded-md w-full aspect-square md:aspect-video flex items-center justify-center">
+              <div className="absolute top-3 right-3 size-10 flex items-center justify-center font-semibold text-sm rounded-full p-3 bg-warning text-warning-foreground">-12%</div>
+              <Image src={destacados[3].featuredImage.url} alt={destacados[3].featuredImage.altText} width={150} height={150} />
             </figure>
-            <figcaption className="flex flex-col md:flex-row justify-between py-4">
-              <h3 className={`${bodoni.className} text-primary text-4xl`}>Te Verde y manzanilla</h3>
+            <figcaption className="flex flex-col md:flex-row justify-between py-4 w-full">
+              <h3 className={`${bodoni.className} text-primary text-4xl`}>{destacados[3].title}</h3>
               <div className="flex flex-col items-start md:items-end justify-between gap-3 md:gap-1 min-w-52">
-                <span className="text-[#828282] font-light">$6.990 - <strong className="font-semibold text-accent">$4.990</strong></span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBag size={16} /></Button>
+                <span className="text-[#828282] font-light">
+                  <Price price={destacados[3].priceRange.minVariantPrice.amount} /> - <strong className="font-semibold text-accent"><Price price={(parseInt(destacados[3].priceRange.minVariantPrice.amount) * 0.88).toString()} /></strong>
+                </span>
+                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
               </div>
             </figcaption>
           </div>
         </div>
       </section>
 
-    </div >
+      <section className="container grid grid-cols-4 grid-rows-2 gap-5 pb-24">
+        <figure className="hidden md:block rounded-md col-span-1 row-span-2 bg-[url('/accesorios-banner.webp')] bg-cover bg-center bg-no-repeat"></figure>
+
+        <div className="col-span-4 row-span-2 md:col-span-2 md:row-span-2 flex flex-col justify-between items-center gap-3">
+          <h2 className={`${bodoni.className} uppercase text-primary text-3xl flex flex-col`}>
+            <span>Accesorios</span>
+            <span className="hidden md:block text-primary/80">Accesorios</span>
+            <span className="hidden md:block text-primary/60">Accesorios</span>
+            <span className="hidden md:block text-primary/40">Accesorios</span>
+            <span className="hidden md:block text-primary/20">Accesorios</span>
+          </h2>
+
+          <div className="flex flex-col md:flex-row gap-5">
+            <div role="card" className="flex flex-col justify-between items-start rounded-md">
+              <figure className="relative bg-card rounded-md w-full max-h-[168px] aspect-square md:aspect-video flex items-center justify-center">
+                <Image src={accesorios[0].featuredImage.url} alt={accesorios[0].featuredImage.altText || `Imagen de ${accesorios[0].title}`} width={130} height={130} />
+              </figure>
+              <figcaption className="flex flex-col md:flex-row justify-between pt-4">
+                <h3 className={`${bodoni.className} text-primary text-xl`}>{accesorios[0].title}</h3>
+                <div className="flex flex-col items-start md:items-end justify-between gap-3 md:gap-2">
+                  <strong className="font-semibold text-accent"><Price price={accesorios[0].priceRange.minVariantPrice.amount} /></strong>
+                  <Button className="bg-primary text-sm hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                </div>
+              </figcaption>
+            </div>
+
+            <div role="card" className="flex flex-col justify-between items-start rounded-md">
+              <figure className="relative bg-card rounded-md w-full max-h-[168px] aspect-square md:aspect-video flex items-center justify-center">
+                <Image src={accesorios[2].featuredImage.url} alt={accesorios[2].featuredImage.altText || `Imagen de ${accesorios[2].title}`} width={130} height={130} />
+              </figure>
+              <figcaption className="flex flex-col md:flex-row justify-between pt-4">
+                <h3 className={`${bodoni.className} text-primary text-xl`}>{accesorios[2].title}</h3>
+                <div className="flex flex-col items-start md:items-end justify-between gap-3 md:gap-2">
+                  <strong className="font-semibold text-accent"><Price price={accesorios[2].priceRange.minVariantPrice.amount} /></strong>
+                  <Button className="bg-primary text-sm hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                </div>
+              </figcaption>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-span-1 row-span-2 hidden md:flex md:flex-col">
+          <figure className="rounded-md bg-card flex-1 flex items-center justify-center">
+            <Image src={accesorios[1].featuredImage.url} alt={accesorios[1].featuredImage.altText || `Imagen de ${accesorios[1].title}`} width={250} height={250} />
+          </figure>
+          <figcaption className="flex flex-col md:flex-row justify-between pt-4">
+            <h3 className={`${bodoni.className} text-primary text-2xl`}>{accesorios[1].title}</h3>
+            <div className="flex flex-col items-start md:items-end justify-between gap-3 md:gap-1 min-w-52">
+              <strong className="font-semibold text-accent"><Price price={accesorios[1].priceRange.minVariantPrice.amount} /></strong>
+              <Button className="bg-primary text-sm hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+            </div>
+          </figcaption>
+        </div>
+      </section>
+
+      <section className="bg-secondary w-full py-12">
+        <div className="container flex justify-between items-center">
+          <Image src="/flor-newsletter.webp" alt="Flor decorativa de seccion de new letter" width={90} height={90} />
+          <form className="flex flex-col items-center gap-7">
+            <h2 className={`text-4xl ${bodoni.className} text-primary`}>Suscríbete a Newsletter de TeaChill</h2>
+            <label className="text-[#828282]" htmlFor="email">Mandanos tu correo y recibe un 20% de descuento.</label>
+            <div className="flex bg-white rounded-md shadow-lg w-full">
+              <input
+                id="email"
+                type="email"
+                placeholder="Escribe tu correo aquí"
+                className="w-full p-2 rounded-md"
+              />
+              <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2 rounded-e-md rounded-s-none">Enviar</Button>
+            </div>
+          </form>
+          <Image src="/flor-newsletter.webp" alt="Flor decorativa de seccion de new letter" width={90} height={90} />
+        </div>
+      </section>
+    </div>
   );
 }
