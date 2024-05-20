@@ -22,12 +22,14 @@ import {
   Mugs, TeBlanco,
   TeNegro, TeRojo,
   Tetera, Whatsapp,
-  BanderaChile, Tiktok
+  BanderaChile, Tiktok,
+  Logo
 } from "@/lib/icons";
 
 import { FooterButton } from "@/app/_root_components/FooterButton";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Tea Chill",
@@ -43,9 +45,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`relative mx-auto overflow-x-hidden ${inter.className}`}>
-        <header className="z-50 bg-background py-8 fixed top-0 left-0 w-full max-h-[122px]">
+        <header className="z-50 bg-background py-8 fixed top-0 left-0 w-full max-h-[122px] border-b border-primary/10">
           <nav className="flex justify-between container">
             <ul className="flex gap-4">
+              <li>
+                <Link href={"/"}>
+                  <Logo />
+                </Link>
+              </li>
               <li>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>

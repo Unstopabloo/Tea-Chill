@@ -31,9 +31,11 @@ export default async function Home() {
       <section className="mt-16">
         <div className="container flex flex-col items-center gap-12">
           <h1 className={`animate-fade-in-up text-[42px] md:text-[56px] w-full text-center text-primary ${bodoni.className} leading-snug`}>Crea una pasión <br /> por el té</h1>
-          <Link href="/products">
-            <Button className="animate-fade-in-up animate-delay-300" variant="default" size="principal">Todos los productos</Button>
-          </Link>
+          <Button asChild className="animate-fade-in-up animate-delay-300" variant="default" size="principal">
+            <Link href="/products" className="flex items-center gap-2">
+              Todos los productos
+            </Link>
+          </Button>
         </div>
         <div className="w-screen flex justify-between mt-8 md:mt-2">
           <div className="flex flex-col items-start">
