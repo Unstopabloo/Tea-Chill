@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { inter } from "@/lib/fonts";
 import "./globals.css";
+import Cart from "@/components/cart";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,8 +14,7 @@ import {
 import {
   ChevronDown, Clock,
   Heart, Mailbox,
-  Search, ShoppingBasket,
-  User, Instagram
+  Search, User, Instagram
 } from "lucide-react";
 import {
   Bolsa, Difusor,
@@ -125,11 +125,6 @@ export default function RootLayout({
                   Descuento del día
                 </Button>
               </li>
-              <li>
-                <Button variant="link" className="flex gap-3 items-center">
-                  SALE
-                </Button>
-              </li>
             </ul>
 
             <ul className="flex gap-3">
@@ -139,9 +134,7 @@ export default function RootLayout({
                 </Button>
               </li>
               <li>
-                <Button variant="link" size="icon">
-                  <ShoppingBasket size={18} />
-                </Button>
+                <Cart />
               </li>
               <li>
                 <Button variant="link" size="icon">

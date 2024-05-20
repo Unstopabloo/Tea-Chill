@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image";
 import { ArrowRight } from "lucide-react"
 import { DayButton } from "./_root_components/DayButton";
-import { ShoppingBasket } from "lucide-react"
 import { Price } from "@/components/Price";
-
+import { AddToCart } from "@/components/cart/add-to-cart"
 import { ManchaHoja, ManchaEnvio, ManchaTarjeta } from "@/lib/icons";
+
+import Link from "next/link";
 
 import { getCollectionProducts } from "@/lib/shopify";
 
@@ -23,13 +24,16 @@ export default async function Home() {
   const matchaAlt = matcha?.featuredImage.altText || destacados[5].featuredImage.altText
   const matchaRegularPrice = matcha?.priceRange.minVariantPrice.amount || destacados[5].priceRange.minVariantPrice.amount
   const matchaDiscountPrice = (parseInt(matchaRegularPrice) * 0.88).toString()
+  const matchaVariants = matcha?.variants || destacados[5].variants
 
   return (
     <div className="mt-20 py-3 min-h-screen">
       <section className="mt-16">
         <div className="container flex flex-col items-center gap-12">
           <h1 className={`animate-fade-in-up text-[42px] md:text-[56px] w-full text-center text-primary ${bodoni.className} leading-snug`}>Crea una pasión <br /> por el té</h1>
-          <Button className="animate-fade-in-up animate-delay-300" variant="default" size="principal">Todos los productos</Button>
+          <Link href="/products">
+            <Button className="animate-fade-in-up animate-delay-300" variant="default" size="principal">Todos los productos</Button>
+          </Link>
         </div>
         <div className="w-screen flex justify-between mt-8 md:mt-2">
           <div className="flex flex-col items-start">
@@ -170,7 +174,8 @@ export default async function Home() {
                 <span className="text-[#828282] font-light">
                   <Price price={destacados[0].priceRange.minVariantPrice.amount} /> - <strong className="font-semibold text-accent"><Price price={(parseInt(destacados[0].priceRange.minVariantPrice.amount) * 0.88).toString()} /></strong>
                 </span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                {/* <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button> */}
+                <AddToCart availableForSale={true} variants={destacados[0].variants} />
               </div>
             </figcaption>
           </div>
@@ -203,7 +208,7 @@ export default async function Home() {
                 <span className="text-[#828282] font-light">
                   <Price price={matchaRegularPrice} /> - <strong className="font-semibold text-accent"><Price price={matchaDiscountPrice} /></strong>
                 </span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                <AddToCart availableForSale={true} variants={matchaVariants} />
               </div>
             </figcaption>
           </div>
@@ -219,7 +224,7 @@ export default async function Home() {
                 <span className="text-[#828282] font-light">
                   <Price price={destacados[1].priceRange.minVariantPrice.amount} /> - <strong className="font-semibold text-accent"><Price price={(parseInt(destacados[1].priceRange.minVariantPrice.amount) * 0.88).toString()} /></strong>
                 </span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                <AddToCart availableForSale={true} variants={destacados[1].variants} />
               </div>
             </figcaption>
           </div>
@@ -235,7 +240,7 @@ export default async function Home() {
                 <span className="text-[#828282] font-light">
                   <Price price={destacados[3].priceRange.minVariantPrice.amount} /> - <strong className="font-semibold text-accent"><Price price={(parseInt(destacados[3].priceRange.minVariantPrice.amount) * 0.88).toString()} /></strong>
                 </span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                <AddToCart availableForSale={true} variants={destacados[3].variants} />
               </div>
             </figcaption>
           </div>
@@ -263,7 +268,7 @@ export default async function Home() {
                 <h3 className={`${bodoni.className} text-primary text-xl`}>{accesorios[0].title}</h3>
                 <div className="flex flex-col items-start md:items-end justify-between gap-3 md:gap-2">
                   <strong className="font-semibold text-accent"><Price price={accesorios[0].priceRange.minVariantPrice.amount} /></strong>
-                  <Button className="bg-primary text-sm hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                  <AddToCart availableForSale={true} variants={accesorios[0].variants} />
                 </div>
               </figcaption>
             </div>
@@ -276,7 +281,7 @@ export default async function Home() {
                 <h3 className={`${bodoni.className} text-primary text-xl`}>{accesorios[2].title}</h3>
                 <div className="flex flex-col items-start md:items-end justify-between gap-3 md:gap-2">
                   <strong className="font-semibold text-accent"><Price price={accesorios[2].priceRange.minVariantPrice.amount} /></strong>
-                  <Button className="bg-primary text-sm hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                  <AddToCart availableForSale={true} variants={accesorios[2].variants} />
                 </div>
               </figcaption>
             </div>
@@ -291,7 +296,7 @@ export default async function Home() {
             <h3 className={`${bodoni.className} text-primary text-2xl`}>{accesorios[1].title}</h3>
             <div className="flex flex-col items-start md:items-end justify-between gap-3 md:gap-1 min-w-52">
               <strong className="font-semibold text-accent"><Price price={accesorios[1].priceRange.minVariantPrice.amount} /></strong>
-              <Button className="bg-primary text-sm hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+              <AddToCart availableForSale={true} variants={accesorios[1].variants} />
             </div>
           </figcaption>
         </div>
