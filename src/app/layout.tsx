@@ -136,7 +136,7 @@ export default function RootLayout({
 
             <ul className="flex gap-3">
               <li>
-                <Button variant="link" size="icon">
+                <Button aria-label="Boton para busqueda de productos especificos" variant="link" size="icon">
                   <Search size={18} />
                 </Button>
               </li>
@@ -144,12 +144,12 @@ export default function RootLayout({
                 <Cart />
               </li>
               <li>
-                <Button variant="link" size="icon">
+                <Button aria-label="Productos gustados" variant="link" size="icon">
                   <Heart size={18} />
                 </Button>
               </li>
               <li>
-                <Button variant="link" size="icon">
+                <Button ara-label="Perfil de usuario" variant="link" size="icon">
                   <User size={18} />
                 </Button>
               </li>

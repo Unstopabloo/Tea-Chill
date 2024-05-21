@@ -40,20 +40,24 @@ export default async function Home() {
         <div className="w-screen flex justify-between mt-8 md:mt-2">
           <div className="flex flex-col items-start">
             <img
+              aria-label="Taza de te y hojas de presentacion"
               src="/te-home-1.webp"
               alt="Una taza de té y hojas"
               className="animate-fade-in-right animate-delay-700 shadow-none md:shadow-lg shadow-primary z-10 object-cover w-[173px] h-[70px] sm:w-[233px] sm:h-[100px] md:w-[333px] md:h-[130px] lg:w-[433px] lg:h-[160px] rounded-md" />
             <img
+              aria-label="Taza de te y hojas de presentacion"
               src="/te-home-2.webp"
               alt="Tres bolsas de té"
               className="animate-fade-in-right animate-delay-800 shadow-none md:shadow-lg shadow-primary object-cover w-[200px] h-[70px] sm:w-[300px] sm:h-[100px] md:w-[430px] md:h-[150px] lg:w-[700px] lg:h-[160px] rounded-md" />
           </div>
           <div className="flex flex-col items-end">
             <img
+              aria-label="Taza de te y hojas de presentacion"
               src="/te-home-3.webp"
               alt="Tres cucharas con tè negro"
               className="animate-fade-in-left animate-delay-700 shadow-none md:shadow-lg shadow-primary z-10 object-cover w-[173px] h-[70px] sm:w-[233px] sm:h-[100px] md:w-[333px] md:h-[130px] lg:w-[433px] lg:h-[160px] rounded-md" />
             <img
+              aria-label="Taza de te y hojas de presentacion"
               src="/te-home-4.webp"
               alt="Un bowl con Matcha verde"
               className="animate-fade-in-left animate-delay-800 shadow-none md:shadow-lg shadow-primary w-[200px] h-[70px] sm:w-[300px] sm:h-[100px] md:w-[430px] md:h-[150px] lg:w-[700px] lg:h-[160px] object-cover rounded-md" />
@@ -72,17 +76,19 @@ export default async function Home() {
 
         <article className="flex flex-col col-span-2 md:col-span-1 p-4 gap-6 animate-fade-in-up animate-delay-900 duration-600">
           <DayButton
+            ariaLabel="Link de desccuento por dia de te negro"
             title="Té Negro"
             day="Lunes"
             discount="-20%"
             href="/dia-chill/lunes"
           >
             <div
-              role="img"
+              aria-label="Imagen de link de dia de descuento"
               className={`day-image w-[60%] h-full overflow-hidden bg-zoom bg-no-repeat bg-center bg-[url('/te-negro.webp')] transition-all duration-300`}
             ></div>
           </DayButton>
           <DayButton
+            ariaLabel="Link de descuento por dia de te rojo"
             right
             title="Té Rojo"
             day="Martes"
@@ -90,22 +96,24 @@ export default async function Home() {
             href="/dia-chill/martes"
           >
             <div
-              role="img"
+              aria-label="Imagen de link de dia de descuento"
               className={`day-image w-[60%] h-full bg-zoom overflow-hidden bg-no-repeat bg-center bg-[url('/te-rojo.webp')] transition-all duration-300`}
             ></div>
           </DayButton>
           <DayButton
+            ariaLabel="Link de descuento por dia de te blanco"
             title="Té Blanco"
             day="Miercoles"
             discount="-20%"
             href="/dia-chill/miercoles"
           >
             <div
-              role="img"
+              aria-label="Imagen de link de dia de descuento"
               className={`day-image w-[60%] h-full overflow-hidden bg-zoom bg-no-repeat bg-center bg-[url('/te-blanco.webp')] transition-all duration-300`}
             ></div>
           </DayButton>
           <DayButton
+            ariaLabel="Link de descuento por dia de te verde"
             right
             title="Té Verde"
             day="Jueves"
@@ -113,18 +121,19 @@ export default async function Home() {
             href="/dia-chill/jueves"
           >
             <div
-              role="img"
+              aria-label="Imagen de link de dia de descuento"
               className={`day-image w-[60%] h-full overflow-hidden bg-zoom bg-no-repeat bg-center bg-[url('/te-verde.webp')] transition-all duration-300`}
             ></div>
           </DayButton>
           <DayButton
+            ariaLabel="Link de descuento por dia de te matcha"
             title="Matcha"
             day="Viernes"
             discount="-25%"
             href="/dia-chill/viernes"
           >
             <div
-              role="img"
+              aria-label="Imagen de link de dia de descuento"
               className={`day-image w-[60%] h-full overflow-hidden bg-zoom bg-no-repeat bg-center bg-[url('/te-matcha.webp')] transition-all duration-300`}
             ></div>
           </DayButton>

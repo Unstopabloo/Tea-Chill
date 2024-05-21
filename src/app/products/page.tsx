@@ -6,12 +6,21 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { Products as AllProducts } from "./_products_components/Products"
-import { getCollectionProducts } from "@/lib/shopify"
+import { Products as AllProducts } from "../../components/products/Products"
+import { getProducts } from "@/lib/shopify"
+import { Filter } from "@/components/products/Filter"
 
-export default async function ProductsPage() {
+export default async function ProductsPage({
+  searchParams
+}: {
+  searchParams?: {
+    filter?: string
+  }
+}) {
+  const filter = searchParams?.filter
+  const query = decodeURIComponent(filter?.split('&').join(' OR ') || 'te-blanco')
 
-  const products = await getCollectionProducts({ collection: 'te-verde' })
+  const products = await getProducts({ query })
 
   return (
     <div className="mt-24 py-3 min-h-screen">
@@ -29,10 +38,10 @@ export default async function ProductsPage() {
           </BreadcrumbList>
         </Breadcrumb>
         <section className="flex gap-16">
-          <aside className="p-10 rounded-md border border-gray-200 min-w-64">
-            <h2>aside aside aside</h2>
-          </aside>
-          <div className="flex justify-between gap-x-1 gap-y-12 flex-wrap">
+          <div aria-label="Contendor de filtro">
+            <Filter />
+          </div>
+          <div className="flex justify-start gap-x-10 gap-y-11 flex-wrap">
             <AllProducts data={products} />
           </div>
         </section>
