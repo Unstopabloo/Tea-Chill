@@ -13,11 +13,10 @@ export async function Products({ data }: { data: Product[] }) {
   return (
     data &&
     data.map((item, index) => (
-      <Suspense fallback={<ProductSkeleton />}>
+      <Suspense key={index} fallback={<ProductSkeleton />}>
         <div className="flex flex-col items-center product-card overflow-hidden min-w-[30%]">
           <Link
             href={`/products/${item.handle}`}
-            key={index}
             aria-label="Tarjeta de producto" className="w-full">
             <figure aria-label="Contenedor de imagen" className="relative bg-card aspect-square rounded-md flex items-center justify-center">
               <Image
