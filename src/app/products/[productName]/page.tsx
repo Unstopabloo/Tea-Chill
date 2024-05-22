@@ -1,6 +1,6 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 import { Gallery } from "@/components/products/Gallery"
-import { getProduct, getProducts } from "@/lib/shopify";
+import { getProduct } from "@/lib/shopify";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { HIDDEN_PRODUCT_TAG } from "@/lib/constants";
@@ -47,17 +47,6 @@ export async function generateMetadata({
       }
       : null
   };
-}
-
-export async function generateStaticParams() {
-  const products = await getProducts({});
-
-  return products.map((product) => ({
-    params: {
-      productName: product.handle
-    }
-  }));
-
 }
 
 export default async function ProductDetailPage({ params }: { params: { productName: string } }) {
