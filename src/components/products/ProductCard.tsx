@@ -42,7 +42,7 @@ export function ProductCard({ link, image, alt, title, description, price, avail
           </div>
         </figcaption>
       </Link>
-      <div aria-label="Boton para añadir producto a carrito" className="z-20 translate-y-14">
+      <div aria-label="Boton para añadir producto a carrito" className="z-20 text-xs md:text-base md:translate-y-14">
         <AddToCart availableForSale={availableForSale} variants={variants} />
       </div>
     </div>

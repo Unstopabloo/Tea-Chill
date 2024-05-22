@@ -41,7 +41,7 @@ export default async function ProductsPage({
           <div aria-label="Contendor de filtro de productos">
             <Filter />
           </div>
-          <div aria-label="Contenedor de productos" className="flex justify-start gap-x-10 gap-y-11 flex-wrap">
+          <div aria-label="Contenedor de productos" className="flex flex-1 min-h-screen justify-start gap-x-10 gap-y-11 flex-wrap">
             <AllProducts data={products} />
           </div>
         </section>

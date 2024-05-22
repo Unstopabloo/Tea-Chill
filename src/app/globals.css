@@ -80,7 +80,8 @@
     @apply bg-background text-foreground;
   }
 
-  .day-image {
+  .day-image,
+  .banner-img {
     clip-path: polygon(23% 0, 100% 0%, 100% 100%, 0% 100%);
   }
 
@@ -115,5 +116,24 @@
       aspect-ratio: 16 / 9;
       background-color: hsla(var(--primary));
     }
+  }
+
+  @media screen and (width <=768px) {
+    .day-link:hover {
+      box-shadow: 2px 2px 8px rgba(26, 26, 26, 0.679);
+
+      .day-image {
+        background-size: 120%;
+      }
+
+      h3 {
+        font-size: 19px;
+      }
+
+      strong {
+        font-size: 13px;
+      }
+    }
+
   }
 }
