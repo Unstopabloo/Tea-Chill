@@ -103,4 +103,17 @@
       font-size: 19px;
     }
   }
+
+  .product-card {
+    figure {
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  .product-card:hover {
+    figure {
+      aspect-ratio: 16 / 9;
+      background-color: hsla(var(--primary));
+    }
+  }
 }

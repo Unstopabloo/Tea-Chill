@@ -40,6 +40,7 @@ import {
   ShopifyCollectionsOperation,
   ShopifyCreateCartOperation,
   ShopifyMenuOperation,
+  ShopifyMultipleCollectionProductsOperation,
   ShopifyPageOperation,
   ShopifyPagesOperation,
   ShopifyProduct,
@@ -262,7 +263,7 @@ export async function getCart(cartId: string): Promise<Cart | undefined> {
     cache: 'no-store'
   });
 
-  // Old carts becomes `null` when you checkout.
+  // Carritos antiguos quedan 'null' al hacer un checkout
   if (!res.body.data.cart) {
     return undefined;
   }
@@ -327,8 +328,8 @@ export async function getCollections(): Promise<Collection[]> {
       path: '/search',
       updatedAt: new Date().toISOString()
     },
-    // Filter out the `hidden` collections.
-    // Collections that start with `hidden-*` need to be hidden on the search page.
+    // Filtrar 'hidden' en collections
+    // Colecciones con `hidden-*` seran ocultados en la home page
     ...reshapeCollections(shopifyCollections).filter(
       (collection) => !collection.handle.startsWith('hidden')
     )
@@ -419,10 +420,8 @@ export async function getProducts({
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
 }
 
-// This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
+// Esto es llamado desde `app/api/revalidate.ts` Asi los previders pueden actualizar la pagina
 export async function revalidate(req: NextRequest): Promise<NextResponse> {
-  // We always need to respond with a 200 status code to Shopify,
-  // otherwise it will continue to retry the request.
   const collectionWebhooks = ['collections/create', 'collections/delete', 'collections/update'];
   const productWebhooks = ['products/create', 'products/delete', 'products/update'];
   const topic = headers().get('x-shopify-topic') || 'unknown';
