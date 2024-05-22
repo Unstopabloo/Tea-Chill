@@ -38,10 +38,10 @@ export default async function ProductsPage({
           </BreadcrumbList>
         </Breadcrumb>
         <section className="flex gap-16">
-          <div aria-label="Contendor de filtro">
+          <div aria-label="Contendor de filtro de productos">
             <Filter />
           </div>
-          <div className="flex justify-start gap-x-10 gap-y-11 flex-wrap">
+          <div aria-label="Contenedor de productos" className="flex justify-start gap-x-10 gap-y-11 flex-wrap">
             <AllProducts data={products} />
           </div>
         </section>

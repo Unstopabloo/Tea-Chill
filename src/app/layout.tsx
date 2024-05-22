@@ -49,7 +49,7 @@ export default function RootLayout({
           <nav className="flex justify-between container">
             <ul className="flex gap-4">
               <li>
-                <Link href={"/"}>
+                <Link aria-label="Link para ir a sitio principal de Tea chill" href={"/"}>
                   <Logo />
                 </Link>
               </li>

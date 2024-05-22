@@ -185,7 +185,6 @@ export default async function Home() {
                 <span className="text-[#828282] font-light">
                   <Price price={destacados[0].priceRange.minVariantPrice.amount} /> - <strong className="font-semibold text-accent"><Price price={(parseInt(destacados[0].priceRange.minVariantPrice.amount) * 0.88).toString()} /></strong>
                 </span>
-                {/* <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button> */}
                 <AddToCart availableForSale={true} variants={destacados[0].variants} />
               </div>
             </figcaption>

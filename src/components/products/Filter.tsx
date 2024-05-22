@@ -113,8 +113,13 @@ export function Filter() {
     <aside className="p-10 rounded-md border bg-white border-gray-200 min-w-64">
       <section className="flex flex-col gap-4">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form
+            aria-label="Formulario para filtrar productos"
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8"
+          >
             <FormField
+              aria-label="Campo de formulario para seleccionar tipos de té"
               control={form.control}
               name="te"
               render={() => (
@@ -146,6 +151,7 @@ export function Filter() {
                             </div>
                             <FormControl>
                               <Checkbox
+                                aria-label="Checkbox para seleccionar tipo de té"
                                 checked={field.value?.includes(item.value)}
                                 onCheckedChange={(checked) => {
                                   return checked
@@ -167,6 +173,7 @@ export function Filter() {
               )}
             />
             <FormField
+              aria-label="Campo de formulario para seleccionar formato de té"
               control={form.control}
               name="formato"
               render={() => (
@@ -183,6 +190,7 @@ export function Filter() {
                       render={({ field }) => {
                         return (
                           <FormItem
+                            aria-label="Campo de formulario para seleccionar formato de té"
                             key={item.value}
                             className="py-3 flex gap-6 items-center justify-between"
                           >
@@ -195,6 +203,7 @@ export function Filter() {
                             </div>
                             <FormControl>
                               <Checkbox
+                                aria-label="Checkbox para seleccionar formato de té"
                                 checked={field.value?.includes(item.value)}
                                 onCheckedChange={(checked) => {
                                   return checked
@@ -216,6 +225,7 @@ export function Filter() {
               )}
             />
             <FormField
+              aria-label="Campo de formulario para seleccionar accesorios"
               control={form.control}
               name="accesorio"
               render={() => (
@@ -226,6 +236,7 @@ export function Filter() {
                   </div>
                   {accesorios.map((item) => (
                     <FormField
+                      aria-label="Campo de formulario para seleccionar accesorios"
                       key={item.value}
                       control={form.control}
                       name="accesorio"
@@ -245,6 +256,7 @@ export function Filter() {
                             </div>
                             <FormControl>
                               <Checkbox
+                                aria-label="Checkbox para seleccionar accesorio"
                                 checked={field.value?.includes(item.value)}
                                 onCheckedChange={(checked) => {
                                   return checked
