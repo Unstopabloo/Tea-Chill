@@ -44,7 +44,7 @@ export default async function ActualDayPage({ params }: { params: { slug: string
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <section className="w-full flex flex-col md:flex-col gap-10 justify-between">
+        <section className="w-full flex flex-col md:flex-row gap-10 justify-between">
           <aside className="w-full md:max-w-56">
             <div className="relative w-full md:w-56 h-24 md:h-[400px] flex justify-center items-end py-5">
               <Image
