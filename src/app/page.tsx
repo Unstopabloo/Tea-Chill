@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image";
 import { ArrowRight } from "lucide-react"
 import { DayButton } from "./_root_components/DayButton";
-import { ShoppingBasket } from "lucide-react"
 import { Price } from "@/components/Price";
-
+import { AddToCart } from "@/components/cart/add-to-cart"
 import { ManchaHoja, ManchaEnvio, ManchaTarjeta } from "@/lib/icons";
+
+import Link from "next/link";
 
 import { getCollectionProducts } from "@/lib/shopify";
 
@@ -23,31 +24,40 @@ export default async function Home() {
   const matchaAlt = matcha?.featuredImage.altText || destacados[5].featuredImage.altText
   const matchaRegularPrice = matcha?.priceRange.minVariantPrice.amount || destacados[5].priceRange.minVariantPrice.amount
   const matchaDiscountPrice = (parseInt(matchaRegularPrice) * 0.88).toString()
+  const matchaVariants = matcha?.variants || destacados[5].variants
 
   return (
     <div className="mt-20 py-3 min-h-screen">
       <section className="mt-16">
         <div className="container flex flex-col items-center gap-12">
           <h1 className={`animate-fade-in-up text-[42px] md:text-[56px] w-full text-center text-primary ${bodoni.className} leading-snug`}>Crea una pasión <br /> por el té</h1>
-          <Button className="animate-fade-in-up animate-delay-300" variant="default" size="principal">Todos los productos</Button>
+          <Button asChild className="animate-fade-in-up animate-delay-300" variant="default" size="principal">
+            <Link href="/products" className="flex items-center gap-2">
+              Todos los productos
+            </Link>
+          </Button>
         </div>
         <div className="w-screen flex justify-between mt-8 md:mt-2">
           <div className="flex flex-col items-start">
             <img
+              aria-label="Taza de te y hojas de presentacion"
               src="/te-home-1.webp"
               alt="Una taza de té y hojas"
               className="animate-fade-in-right animate-delay-700 shadow-none md:shadow-lg shadow-primary z-10 object-cover w-[173px] h-[70px] sm:w-[233px] sm:h-[100px] md:w-[333px] md:h-[130px] lg:w-[433px] lg:h-[160px] rounded-md" />
             <img
+              aria-label="Taza de te y hojas de presentacion"
               src="/te-home-2.webp"
               alt="Tres bolsas de té"
               className="animate-fade-in-right animate-delay-800 shadow-none md:shadow-lg shadow-primary object-cover w-[200px] h-[70px] sm:w-[300px] sm:h-[100px] md:w-[430px] md:h-[150px] lg:w-[700px] lg:h-[160px] rounded-md" />
           </div>
           <div className="flex flex-col items-end">
             <img
+              aria-label="Taza de te y hojas de presentacion"
               src="/te-home-3.webp"
               alt="Tres cucharas con tè negro"
               className="animate-fade-in-left animate-delay-700 shadow-none md:shadow-lg shadow-primary z-10 object-cover w-[173px] h-[70px] sm:w-[233px] sm:h-[100px] md:w-[333px] md:h-[130px] lg:w-[433px] lg:h-[160px] rounded-md" />
             <img
+              aria-label="Taza de te y hojas de presentacion"
               src="/te-home-4.webp"
               alt="Un bowl con Matcha verde"
               className="animate-fade-in-left animate-delay-800 shadow-none md:shadow-lg shadow-primary w-[200px] h-[70px] sm:w-[300px] sm:h-[100px] md:w-[430px] md:h-[150px] lg:w-[700px] lg:h-[160px] object-cover rounded-md" />
@@ -66,17 +76,19 @@ export default async function Home() {
 
         <article className="flex flex-col col-span-2 md:col-span-1 p-4 gap-6 animate-fade-in-up animate-delay-900 duration-600">
           <DayButton
+            ariaLabel="Link de desccuento por dia de te negro"
             title="Té Negro"
             day="Lunes"
             discount="-20%"
             href="/dia-chill/lunes"
           >
             <div
-              role="img"
+              aria-label="Imagen de link de dia de descuento"
               className={`day-image w-[60%] h-full overflow-hidden bg-zoom bg-no-repeat bg-center bg-[url('/te-negro.webp')] transition-all duration-300`}
             ></div>
           </DayButton>
           <DayButton
+            ariaLabel="Link de descuento por dia de te rojo"
             right
             title="Té Rojo"
             day="Martes"
@@ -84,22 +96,24 @@ export default async function Home() {
             href="/dia-chill/martes"
           >
             <div
-              role="img"
+              aria-label="Imagen de link de dia de descuento"
               className={`day-image w-[60%] h-full bg-zoom overflow-hidden bg-no-repeat bg-center bg-[url('/te-rojo.webp')] transition-all duration-300`}
             ></div>
           </DayButton>
           <DayButton
+            ariaLabel="Link de descuento por dia de te blanco"
             title="Té Blanco"
             day="Miercoles"
             discount="-20%"
             href="/dia-chill/miercoles"
           >
             <div
-              role="img"
+              aria-label="Imagen de link de dia de descuento"
               className={`day-image w-[60%] h-full overflow-hidden bg-zoom bg-no-repeat bg-center bg-[url('/te-blanco.webp')] transition-all duration-300`}
             ></div>
           </DayButton>
           <DayButton
+            ariaLabel="Link de descuento por dia de te verde"
             right
             title="Té Verde"
             day="Jueves"
@@ -107,18 +121,19 @@ export default async function Home() {
             href="/dia-chill/jueves"
           >
             <div
-              role="img"
+              aria-label="Imagen de link de dia de descuento"
               className={`day-image w-[60%] h-full overflow-hidden bg-zoom bg-no-repeat bg-center bg-[url('/te-verde.webp')] transition-all duration-300`}
             ></div>
           </DayButton>
           <DayButton
+            ariaLabel="Link de descuento por dia de te matcha"
             title="Matcha"
             day="Viernes"
             discount="-25%"
             href="/dia-chill/viernes"
           >
             <div
-              role="img"
+              aria-label="Imagen de link de dia de descuento"
               className={`day-image w-[60%] h-full overflow-hidden bg-zoom bg-no-repeat bg-center bg-[url('/te-matcha.webp')] transition-all duration-300`}
             ></div>
           </DayButton>
@@ -170,7 +185,7 @@ export default async function Home() {
                 <span className="text-[#828282] font-light">
                   <Price price={destacados[0].priceRange.minVariantPrice.amount} /> - <strong className="font-semibold text-accent"><Price price={(parseInt(destacados[0].priceRange.minVariantPrice.amount) * 0.88).toString()} /></strong>
                 </span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                <AddToCart availableForSale={true} variants={destacados[0].variants} />
               </div>
             </figcaption>
           </div>
@@ -203,7 +218,7 @@ export default async function Home() {
                 <span className="text-[#828282] font-light">
                   <Price price={matchaRegularPrice} /> - <strong className="font-semibold text-accent"><Price price={matchaDiscountPrice} /></strong>
                 </span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                <AddToCart availableForSale={true} variants={matchaVariants} />
               </div>
             </figcaption>
           </div>
@@ -219,7 +234,7 @@ export default async function Home() {
                 <span className="text-[#828282] font-light">
                   <Price price={destacados[1].priceRange.minVariantPrice.amount} /> - <strong className="font-semibold text-accent"><Price price={(parseInt(destacados[1].priceRange.minVariantPrice.amount) * 0.88).toString()} /></strong>
                 </span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                <AddToCart availableForSale={true} variants={destacados[1].variants} />
               </div>
             </figcaption>
           </div>
@@ -235,7 +250,7 @@ export default async function Home() {
                 <span className="text-[#828282] font-light">
                   <Price price={destacados[3].priceRange.minVariantPrice.amount} /> - <strong className="font-semibold text-accent"><Price price={(parseInt(destacados[3].priceRange.minVariantPrice.amount) * 0.88).toString()} /></strong>
                 </span>
-                <Button className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                <AddToCart availableForSale={true} variants={destacados[3].variants} />
               </div>
             </figcaption>
           </div>
@@ -263,7 +278,7 @@ export default async function Home() {
                 <h3 className={`${bodoni.className} text-primary text-xl`}>{accesorios[0].title}</h3>
                 <div className="flex flex-col items-start md:items-end justify-between gap-3 md:gap-2">
                   <strong className="font-semibold text-accent"><Price price={accesorios[0].priceRange.minVariantPrice.amount} /></strong>
-                  <Button className="bg-primary text-sm hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                  <AddToCart availableForSale={true} variants={accesorios[0].variants} />
                 </div>
               </figcaption>
             </div>
@@ -276,7 +291,7 @@ export default async function Home() {
                 <h3 className={`${bodoni.className} text-primary text-xl`}>{accesorios[2].title}</h3>
                 <div className="flex flex-col items-start md:items-end justify-between gap-3 md:gap-2">
                   <strong className="font-semibold text-accent"><Price price={accesorios[2].priceRange.minVariantPrice.amount} /></strong>
-                  <Button className="bg-primary text-sm hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+                  <AddToCart availableForSale={true} variants={accesorios[2].variants} />
                 </div>
               </figcaption>
             </div>
@@ -291,7 +306,7 @@ export default async function Home() {
             <h3 className={`${bodoni.className} text-primary text-2xl`}>{accesorios[1].title}</h3>
             <div className="flex flex-col items-start md:items-end justify-between gap-3 md:gap-1 min-w-52">
               <strong className="font-semibold text-accent"><Price price={accesorios[1].priceRange.minVariantPrice.amount} /></strong>
-              <Button className="bg-primary text-sm hover:bg-primary/90 text-white flex items-center gap-2">Agregar al Carrito <ShoppingBasket size={16} /></Button>
+              <AddToCart availableForSale={true} variants={accesorios[1].variants} />
             </div>
           </figcaption>
         </div>
