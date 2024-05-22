@@ -25,7 +25,7 @@ export async function Detail({ product }: { product: Product }) {
         <div className="flex gap-4 items-center">
           {
             product.tags && product.tags.map(tag => (
-              <div className="flex flex-col gap-2 p-2 items-center">
+              <div key={Math.random()} className="flex flex-col gap-2 p-2 items-center">
                 {
                   tag === 'Detox' && <Detox />
                 }
