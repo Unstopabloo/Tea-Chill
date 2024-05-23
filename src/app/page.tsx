@@ -75,7 +75,11 @@ export default async function Home() {
         <article className="flex flex-col items-center justify-center text-center col-span-2 md:col-span-1 p-4 max-w-[520px] gap-9">
           <h2 className={`animate-fade-in-up text-[42px] md:text-[56px] text-primary ${bodoni.className}`}>¿ Porque TeaChill ?</h2>
           <p className="animate-fade-in-up animate-delay-150">En TeaChill, te ofrecemos una amplia variedad de tés que no solo son deliciosos, ¡sino también beneficiosos para tu bienestar! Nuestros tés están diseñados para combatir el sobrepeso, quemar grasas saturadas y brindar beneficios para la piel, el cabello y las uñas. Además, ayudan a contrarrestar el envejecimiento gracias a sus poderosos antioxidantes y promueven la salud mental. Es por esto que tenemos descuentos por día, descubre cuál es tu día favorito!</p>
-          <Button className="animate-fade-in-up animate-delay-300 flex items-center gap-2" variant="default" size="principal">Descuento por día <ArrowRight size={20} /></Button>
+          <Button asChild className="animate-fade-in-up animate-delay-300 flex items-center gap-2" variant="default" size="principal">
+            <Link href={"/dia"}>
+              Descuento por día <ArrowRight size={20} />
+            </Link>
+          </Button>
         </article>
 
         <article className="flex flex-col col-span-2 md:col-span-1 p-4 gap-6 animate-fade-in-up animate-delay-900 duration-600">
@@ -84,7 +88,7 @@ export default async function Home() {
             title="Té Negro"
             day="Lunes"
             discount="-20%"
-            href="/dia-chill/lunes"
+            href="/dia/lunes"
           >
             <div
               aria-label="Imagen de link de dia de descuento"
@@ -97,7 +101,7 @@ export default async function Home() {
             title="Té Rojo"
             day="Martes"
             discount="-15%"
-            href="/dia-chill/martes"
+            href="/dia/martes"
           >
             <div
               aria-label="Imagen de link de dia de descuento"
@@ -109,7 +113,7 @@ export default async function Home() {
             title="Té Blanco"
             day="Miercoles"
             discount="-20%"
-            href="/dia-chill/miercoles"
+            href="/dia/miercoles"
           >
             <div
               aria-label="Imagen de link de dia de descuento"
@@ -122,7 +126,7 @@ export default async function Home() {
             title="Té Verde"
             day="Jueves"
             discount="-20%"
-            href="/dia-chill/jueves"
+            href="/dia/jueves"
           >
             <div
               aria-label="Imagen de link de dia de descuento"
@@ -134,7 +138,7 @@ export default async function Home() {
             title="Matcha"
             day="Viernes"
             discount="-25%"
-            href="/dia-chill/viernes"
+            href="/dia/viernes"
           >
             <div
               aria-label="Imagen de link de dia de descuento"

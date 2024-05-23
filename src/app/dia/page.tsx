@@ -25,8 +25,8 @@ export default async function DiaPage() {
           </BreadcrumbList>
         </Breadcrumb>
         <Banner day={diaActual} />
-        <div className="flex flex-col items-center gap-10 p-40">
-          <h2 className={`${bodoni.className} text-4xl text-primary text-center max-w-[420px]`}>Tea Chill te regala descuentos por día! Revisa acá tu día favorito.</h2>
+        <div className="flex flex-col items-center gap-10 py-20 px-5 md:p-40">
+          <h2 className={`${bodoni.className} text-4xl text-primary text-center  md:max-w-[420px]`}>Tea Chill te regala descuentos por día! Revisa acá tu día favorito.</h2>
           <Image src={"/logo.png"} alt="Logo de Tea Chill" width={150} height={55} />
         </div>
         <section className="flex flex-col w-full gap-16">
