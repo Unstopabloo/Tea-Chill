@@ -18,7 +18,7 @@ function SubmitButton({
 }) {
   const { pending } = useFormStatus();
   const buttonClasses =
-    'relative bg-primary w-full hover:bg-primary/90 text-white flex items-center justify-center gap-2 py-2 px-4 rounded-md transition-opacity duration-200';
+    'relative bg-primary w-full hover:bg-primary/90 text-white flex items-center justify-center gap-1 md:gap-2 py-2 px-4 rounded-md transition-opacity duration-200';
   const disabledClasses = 'cursor-not-allowed opacity-60 hover:opacity-60';
 
   if (!availableForSale) {
