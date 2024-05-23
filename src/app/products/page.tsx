@@ -9,6 +9,8 @@ import {
 import { Products as AllProducts } from "../../components/products/Products"
 import { getProducts } from "@/lib/shopify"
 import { Filter } from "@/components/products/Filter"
+import Image from "next/image"
+import banner from "../../../public/products-banner.png"
 
 export default async function ProductsPage({
   searchParams
@@ -24,7 +26,15 @@ export default async function ProductsPage({
 
   return (
     <div className="mt-24 py-3 min-h-screen">
-      <div className="bg-primary h-40 w-full"></div>
+      <Image
+        src={banner}
+        alt="Banner de productos en el que se muestran variedades de especias"
+        sizes="100vw"
+        width={1920}
+        height={200}
+        quality={100}
+        placeholder="blur"
+      />
       <div className="container py-4 flex flex-col gap-10">
         <Breadcrumb>
           <BreadcrumbList>
@@ -41,7 +51,7 @@ export default async function ProductsPage({
           <div aria-label="Contendor de filtro de productos">
             <Filter />
           </div>
-          <div aria-label="Contenedor de productos" className="flex justify-start gap-x-10 gap-y-11 flex-wrap">
+          <div aria-label="Contenedor de productos" className="flex flex-1 min-h-screen justify-start gap-x-10 gap-y-11 flex-wrap">
             <AllProducts data={products} />
           </div>
         </section>

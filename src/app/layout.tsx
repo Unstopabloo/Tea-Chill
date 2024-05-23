@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -93,12 +93,16 @@ export default function RootLayout({
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    <DropdownMenuItem className="flex gap-3">
-                      <Bolsa /><strong className="text-primary">Té en bolsas</strong>
+                    <DropdownMenuItem>
+                      <Link href={"/products?filter=bolsa-piramide"} className="flex gap-3">
+                        <Bolsa /><strong className="text-primary hover:text-secondary">Té en bolsas</strong>
+                      </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="flex gap-3">
-                      <Hojas /><strong className="text-primary">Té en hojas</strong>
+                    <DropdownMenuItem>
+                      <Link href={"products?filter=bolsa-cuadrada"} className="flex gap-3">
+                        <Hojas /><strong className="text-primary hover:text-secondary">Té en hojas</strong>
+                      </Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -112,24 +116,39 @@ export default function RootLayout({
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    <DropdownMenuItem className="flex gap-3">
-                      <Tetera /><strong className="text-primary">Tetera de té</strong>
+                    <DropdownMenuItem asChild>
+                      <Link href={"/products?filter=tetera"} className="flex gap-3">
+                        <Tetera /><strong className="text-primary">Tetera de té</strong>
+                      </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="flex gap-3">
-                      <Difusor /><strong className="text-primary">Difusor</strong>
+                    <DropdownMenuItem asChild>
+                      <Link href={"/products?filter=infusor"} className="flex gap-3">
+                        <Difusor /><strong className="text-primary">Difusor</strong>
+                      </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="flex gap-3">
-                      <Mugs /><strong className="text-primary">Mugs y Tazas</strong>
+                    <DropdownMenuItem asChild>
+                      <Link href={"/products?filter=mug-tazas"} className="flex gap-3">
+                        <Mugs /><strong className="text-primary">Mugs y Tazas</strong>
+                      </Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
 
                 </DropdownMenu>
               </li>
               <li>
-                <Button variant="link" className="flex gap-3 items-center">
-                  Descuento del día
+                <Button asChild variant="link" className="flex gap-3 items-center">
+                  <Link href={"/dia"}>
+                    Descuento del día
+                  </Link>
+                </Button>
+              </li>
+              <li>
+                <Button asChild variant="link" className="flex gap-3 items-center">
+                  <Link href={"/products"}>
+                    Nuestros productos
+                  </Link>
                 </Button>
               </li>
             </ul>

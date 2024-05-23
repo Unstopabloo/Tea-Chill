@@ -35,14 +35,14 @@ export function ProductCard({ link, image, alt, title, description, price, avail
         </figure>
         <figcaption aria-label="Datos de producto" className="p-4 flex flex-col gap-1 items-center bg-background">
           <h3 className={`${bodoni.className} font-semibold text-primary text-lg`}>{title}</h3>
-          <p className={`${bodoni.className} text-[#828282] font-normal text-sm`}>{description}</p>
+          <p className={`${bodoni.className} text-primary/90 font-normal text-sm`}>{description}</p>
           <div className="mt-2 flex items-center justify-between gap-14">
-            <small className="text-[#606060] font-normal">60 grs</small>
+            <small className="text-[#505050] font-normal">60 grs</small>
             <strong className="text-accent font-semibold text-base"><Price price={price.toString()} /></strong>
           </div>
         </figcaption>
       </Link>
-      <div aria-label="Boton para añadir producto a carrito" className="z-20 translate-y-14">
+      <div aria-label="Boton para añadir producto a carrito" className="z-20 text-xs md:text-base md:translate-y-14">
         <AddToCart availableForSale={availableForSale} variants={variants} />
       </div>
     </div>
