@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Products as AllProducts } from "../../components/products/Products"
 import { getProducts } from "@/lib/shopify"
-import { Filter } from "@/components/products/Filter"
+import { FilterDesk, FilterMobile } from "@/components/products/Filter"
 import Image from "next/image"
 import banner from "../../../public/products-banner.png"
 
@@ -47,11 +47,12 @@ export default async function ProductsPage({
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <section className="flex gap-16">
+        <section className="flex flex-col md:flex-row gap-16">
           <div aria-label="Contendor de filtro de productos">
-            <Filter />
+            <FilterDesk />
+            <FilterMobile />
           </div>
-          <div aria-label="Contenedor de productos" className="flex flex-1 min-h-screen justify-start gap-x-10 gap-y-11 flex-wrap">
+          <div aria-label="Contenedor de productos" className="grid grid-cols-2 md:flex md:flex-1 min-h-screen md:justify-start gap-x-6 gap-y-11 flex-wrap">
             <AllProducts data={products} />
           </div>
         </section>

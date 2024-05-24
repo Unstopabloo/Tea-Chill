@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { inter } from "@/lib/fonts";
 import "./globals.css";
 import Cart from "@/components/cart";
-
+import { Search } from "@/app/_root_components/Search";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -13,9 +13,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   ChevronDown, Clock,
-  Heart, Mailbox,
-  Search, User, Instagram
+  Heart, Mailbox, User, Instagram
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import {
   Bolsa, Difusor,
   Hojas, Matcha,
@@ -25,15 +32,18 @@ import {
   BanderaChile, Tiktok,
   Logo
 } from "@/lib/icons";
+import { MobileMenu } from "./_root_components/MobileMenu";
 
 import { FooterButton } from "@/app/_root_components/FooterButton";
 
 import Image from "next/image";
 import Link from "next/link";
 
+import { DAYS } from "@/components/dia/dayTypes";
+
 export const metadata: Metadata = {
   title: "Tea Chill",
-  description: "Tea Chill es una tienda de té online",
+  description: "Los mejor en té para armonizar cada dia de tu semana",
 };
 
 export default function RootLayout({
@@ -41,12 +51,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const date = new Date()
+  const day = date.getDay()
+  const actualDay = DAYS.find(d => d.index === day)
+  const handle = actualDay?.handle
 
   return (
     <html lang="es">
       <body className={`relative mx-auto overflow-x-hidden ${inter.className}`}>
         <header className="z-50 bg-background py-8 fixed top-0 left-0 w-full max-h-[122px] border-b border-primary/10">
-          <nav className="flex justify-between container">
+          <nav className="hidden md:flex justify-between container">
             <ul className="flex gap-4">
               <li>
                 <Link aria-label="Link para ir a sitio principal de Tea chill" href={"/"}>
@@ -139,7 +153,7 @@ export default function RootLayout({
               </li>
               <li>
                 <Button asChild variant="link" className="flex gap-3 items-center">
-                  <Link href={"/dia"}>
+                  <Link href={`/dia/${handle}`}>
                     Descuento del día
                   </Link>
                 </Button>
@@ -155,22 +169,27 @@ export default function RootLayout({
 
             <ul className="flex gap-3">
               <li>
-                <Button aria-label="Boton para busqueda de productos especificos" variant="link" size="icon">
-                  <Search size={18} />
-                </Button>
+                <Search />
               </li>
               <li>
                 <Cart />
               </li>
               <li>
-                <Button aria-label="Productos gustados" variant="link" size="icon">
-                  <Heart size={18} />
-                </Button>
-              </li>
-              <li>
-                <Button ara-label="Perfil de usuario" variant="link" size="icon">
+                <Button aria-label="Perfil de usuario" variant="link" size="icon">
                   <User size={18} />
                 </Button>
+              </li>
+            </ul>
+          </nav>
+          <nav className="flex md:hidden">
+            <ul className="flex items-center justify-between px-2 gap-4 w-full">
+              <li>
+                <Link aria-label="Link para ir a sitio principal de Tea chill" href={"/"}>
+                  <Logo />
+                </Link>
+              </li>
+              <li>
+                <MobileMenu />
               </li>
             </ul>
           </nav>
@@ -178,7 +197,7 @@ export default function RootLayout({
         <main>
           {children}
         </main>
-        <footer className="flex items-start justify-between gap-10 px-2 py-10 container">
+        <footer className="flex flex-wrap items-start justify-between gap-10 px-2 py-10 container">
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-semibold">Atención a cliente</h2>
             <ul className="flex flex-col gap-3 max-w-96">
@@ -192,7 +211,7 @@ export default function RootLayout({
               </li>
               <li className="flex flex-col gap-3">
                 <h3 className="text-primary flex gap-2 items-center"><Clock strokeWidth={1} /> Horarios de Atención</h3>
-                <Button variant="link" className="text-[#828282] font-normal p-0 flex flex-col items-start">
+                <Button aria-label="Nuestros horarios" variant="link" className="text-[#6a6a6a] font-normal p-0 flex flex-col items-start">
                   <span>Lunes a Viernes 9:00am a 17:00pm</span>
                   <span>Sábado 9:00am a 13:00pm</span>
                   <span>Domingo Cerrado</span>
@@ -231,14 +250,14 @@ export default function RootLayout({
           <div className="flex flex-col gap-4">
             <ul className="flex flex-col gap-3 max-w-96">
               <li className="text-primary font-normal">Somos una tienda 100% Segura</li>
-              <li className="text-primary font-normal flex gap-2">Compra en Chile <BanderaChile /></li>
-              <li className="text-primary font-normal flex flex-col gap-1">
+              <li aria-label="Posicion geografica" className="text-primary font-normal flex gap-2">Compra en Chile <BanderaChile /></li>
+              <li aria-label="Metodos de pago" className="text-primary font-normal flex flex-col gap-1">
                 Paga con: <Image src={'/creditos.png'} alt="Imagen de metodos de pago" width={244} height={34} />
               </li>
-              <li className="text-primary font-normal flex flex-col gap-1">
+              <li aria-label="Metodos de envío" className="text-primary font-normal flex flex-col gap-1">
                 Envíos: <Image src={'/chileexpress.png'} alt="Imagen de chileexpress" width={244} height={34} />
               </li>
-              <li className="text-primary font-normal flex flex-col gap-1">
+              <li aria-label="Nuestras redes sociales" className="text-primary font-normal flex flex-col gap-1">
                 Síguenos en: <div className="flex gap-2"><Instagram strokeWidth={1} /> <Tiktok /></div>
               </li>
             </ul>
