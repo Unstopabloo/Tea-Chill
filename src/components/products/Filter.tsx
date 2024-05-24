@@ -7,11 +7,19 @@ import { TeNegro, TeRojo, TeBlanco, Matcha, Bolsa, Hojas, Tetera, Difusor, Mugs 
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
-  FormLabel
+  FormLabel,
+  FormMessage
 } from "@/components/ui/form"
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -82,8 +90,12 @@ const FormSchema = z.object({
   accesorio: z.array(z.string()).optional()
 })
 
+const FormSchemaMobile = z.object({
+  te: z.string().optional()
+})
 
-export function Filter() {
+
+export function FilterDesk() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema)
   })
@@ -110,7 +122,7 @@ export function Filter() {
   }
 
   return (
-    <aside className="p-10 rounded-md border bg-white border-gray-200 min-w-64">
+    <aside className="hidden md:block p-10 rounded-md border bg-white border-gray-200 min-w-64">
       <section className="flex flex-col gap-4">
         <Form {...form}>
           <form
@@ -282,5 +294,70 @@ export function Filter() {
         </Form>
       </section>
     </aside>
+  )
+}
+
+export function FilterMobile() {
+  const form = useForm<z.infer<typeof FormSchemaMobile>>({
+    resolver: zodResolver(FormSchemaMobile)
+  })
+
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { replace } = useRouter()
+
+  function onSubmit(data: z.infer<typeof FormSchemaMobile>) {
+    const params = new URLSearchParams(searchParams.toString())
+    const filterParam = data.te ? data.te + '&' : '';
+
+    let filters = ''
+
+    if (filterParam) filters = filters + '&' + filterParam
+
+    params.set('filter', filters)
+
+    replace(`${pathname}?${params.toString()}`)
+  }
+
+  return (
+    <aside className="flex md:hidden p-10 rounded-md min-w-64">
+      <section className="flex flex-col gap-4">
+        <Form {...form}>
+          <form
+            aria-label="Formulario para filtrar productos"
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 flex gap-4"
+          >
+            <FormField
+              control={form.control}
+              name="te"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-primary">Tipo de té</FormLabel>
+                  <Select onValueChange={field.onChange}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecciona un te" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {
+                        tes.map((item) => (
+                          <SelectItem className="hover:bg-primary" key={item.value} value={item.value}>
+                            {item.name}
+                          </SelectItem>
+                        ))
+                      }
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button className="w-full rounded-md shadow-md" type="submit">Filtrar</Button>
+          </form>
+        </Form>
+      </section>
+    </aside >
   )
 }

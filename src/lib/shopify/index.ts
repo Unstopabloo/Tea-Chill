@@ -1,3 +1,5 @@
+"use server"
+
 import { HIDDEN_PRODUCT_TAG, SHOPIFY_GRAPHQL_API_ENDPOINT, TAGS } from '@/lib/constants';
 import { isShopifyError } from '@/lib/type-guards';
 import { ensureStartsWith } from '@/lib/utils';
@@ -21,7 +23,8 @@ import { getPageQuery, getPagesQuery } from './queries/page';
 import {
   getProductQuery,
   getProductRecommendationsQuery,
-  getProductsQuery
+  getProductsQuery,
+  searchProductsQuery
 } from './queries/product';
 import {
   Cart,
@@ -40,7 +43,6 @@ import {
   ShopifyCollectionsOperation,
   ShopifyCreateCartOperation,
   ShopifyMenuOperation,
-  ShopifyMultipleCollectionProductsOperation,
   ShopifyPageOperation,
   ShopifyPagesOperation,
   ShopifyProduct,
@@ -420,6 +422,28 @@ export async function getProducts({
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
 }
 
+export async function searchProducts({
+  query,
+  reverse,
+  sortKey
+}: {
+  query?: string;
+  reverse?: boolean;
+  sortKey?: string;
+}): Promise<Product[]> {
+  const res = await shopifyFetch<ShopifyProductsOperation>({
+    query: searchProductsQuery,
+    tags: [TAGS.products],
+    variables: {
+      query,
+      reverse,
+      sortKey
+    }
+  });
+
+  return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+}
+
 // Esto es llamado desde `app/api/revalidate.ts` Asi los previders pueden actualizar la pagina
 export async function revalidate(req: NextRequest): Promise<NextResponse> {
   const collectionWebhooks = ['collections/create', 'collections/delete', 'collections/update'];
@@ -435,7 +459,6 @@ export async function revalidate(req: NextRequest): Promise<NextResponse> {
   }
 
   if (!isCollectionUpdate && !isProductUpdate) {
-    // We don't need to revalidate anything for any other topics.
     return NextResponse.json({ status: 200 });
   }
 
