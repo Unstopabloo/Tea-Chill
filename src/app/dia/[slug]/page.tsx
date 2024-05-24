@@ -9,6 +9,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { bodoni } from "@/lib/fonts";
 
+import te_blanco_banner_info from "../../../../public/teblancobannerinfo.png";
+import te_negro_banner_info from "../../../../public/tenegrobannerinfo.png";
+import te_rojo_banner_info from "../../../../public/terojobannerinfo.png";
+import te_verde_banner_info from "../../../../public/teverdebannerinfo.png";
+
 export default async function ActualDayPage({ params }: { params: { slug: string } }) {
   const dia = params.slug
   const diaActual = DAYS.find(day => day.handle === dia)
@@ -21,6 +26,21 @@ export default async function ActualDayPage({ params }: { params: { slug: string
       </Button>
     </div>
   )
+
+  const nombreDia = diaActual?.name
+  let img
+
+  if (nombreDia === 'Lunes') {
+    img = te_negro_banner_info
+  } else if (nombreDia === 'Martes') {
+    img = te_rojo_banner_info
+  } else if (nombreDia === 'Miercoles') {
+    img = te_blanco_banner_info
+  } else if (nombreDia === 'Jueves') {
+    img = te_verde_banner_info
+  } else {
+    img = te_rojo_banner_info
+  }
 
   const collection = diaActual.collection
   const products = await getCollectionProducts({ collection })
@@ -79,9 +99,9 @@ export default async function ActualDayPage({ params }: { params: { slug: string
               })
             }
           </div>
-
         </section>
       </section>
+      <Image src={img} alt="Banner informativo de te" width={1920} height={100} />
     </div>
   )
 }
