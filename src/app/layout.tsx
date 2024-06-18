@@ -61,8 +61,8 @@ export default function RootLayout({
       <head>
         <link
           rel="icon"
-          href="/icon.ico"
-          type="image/ico"
+          href="/icon.png"
+          type="image/png"
           sizes="32x32"
         />
       </head>
