@@ -58,6 +58,14 @@ export default function RootLayout({
 
   return (
     <html lang="es">
+      <head>
+        <link
+          rel="icon"
+          href="/icon.ico"
+          type="image/ico"
+          sizes="32x32"
+        />
+      </head>
       <body className={`relative mx-auto overflow-x-hidden ${inter.className}`}>
         <header className="z-50 bg-background py-8 fixed top-0 left-0 w-full max-h-[122px] border-b border-primary/10">
           <nav className="hidden md:flex justify-between container">
